@@ -40,10 +40,10 @@ public class Bird extends Box {
     @Override
     public void update(double deltaTime) {
         animated.innerUpdate(deltaTime);
-        acceleration += 1;
+        acceleration = Math.min(acceleration + 2.5, 25);
 
         if (input.getInputStatus("up") == 1) {
-            acceleration = -50;
+            acceleration = -40;
         }
 
         velocity.setY(acceleration);
@@ -52,11 +52,5 @@ public class Bird extends Box {
     @Override
     public void draw(Graphics2D g2) {
         animated.innerDraw(g2);
-    }
-
-    @Override
-    public boolean checkCollision(Box box) {
-        getHitbox().setBounds((int) position.getX(), (int) position.getY(), getWidth(), getHeight());
-        return super.checkCollision(box);
     }
 }
