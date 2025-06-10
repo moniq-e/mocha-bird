@@ -14,7 +14,7 @@ public class App extends Application {
     public App() throws IOException {
         input.addAction("up", KeyEvent.VK_SPACE);
 
-        var bird = new Bird(290 / 2, 512 / 2, input);
+        var bird = new Bird(getScreenWidth() / 2, getScreenHeight() / 2, input);
         
 
         var sprite = new Sprite(0, 0, Resources.getImage("sprites/background-day.png"));
