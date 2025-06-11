@@ -4,23 +4,26 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import org.mocha.Application;
-import org.mocha.actor.Sprite;
+import org.mocha.annotations.Multithreading;
 import org.mocha.annotations.Window;
-import org.mocha.util.platform.Resources;
 
-@Window(title = "Mocha Bird", width = 288, height = 512)
+@Window(title = "Mocha Bird", width = 288, height = 512, fullScreen = false)
+@Multithreading()
 public class App extends Application {
+    public boolean started = false;
 
     public App() throws IOException {
         input.addAction("up", KeyEvent.VK_SPACE);
 
-        var bird = new Bird(getScreenWidth() / 2, getScreenHeight() / 2, input);
-        
+        var bird = new Bird(getScreenWidth() / 2, getScreenHeight() / 2, this, input);
 
-        var sprite = new Sprite(0, 0, Resources.getImage("sprites/background-day.png"));
+        var background = new Background();
 
-        scene.addActor(sprite);
+        var pipe = new Pipe(this);
+
         scene.addActor(bird);
+        scene.addActor(pipe);
+        scene.addActor(background);
 
         init();
     }
