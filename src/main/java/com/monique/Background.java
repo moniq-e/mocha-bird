@@ -8,7 +8,7 @@ import org.mocha.util.GraphicsUtil;
 import org.mocha.util.platform.Resources;
 
 public class Background extends Sprite {
-    private double speed = 20;
+    private double speed = 15;
 
     public Background() throws IOException {
         super(0, 0, Resources.getImage("sprites/background-day.png"));
