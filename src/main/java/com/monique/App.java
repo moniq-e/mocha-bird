@@ -35,7 +35,7 @@ public class App extends Application {
 
             if (actor instanceof Box) {
                 var b = (Box) actor;
-                return a.checkCollision(b);
+                if (b.checkCollision(a)) return true;
             }
         }
         return false;

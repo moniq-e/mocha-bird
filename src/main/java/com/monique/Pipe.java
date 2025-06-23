@@ -1,6 +1,7 @@
 package com.monique;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import org.mocha.actor.Box;
@@ -56,5 +57,18 @@ public class Pipe extends Box {
     public void draw(Graphics2D g2) {
         super.draw(g2);
         GraphicsUtil.drawRotatedImage(sprite.getSprite(), getX(), getY() - gap, Math.PI, scale, anchor, g2);
+    }
+
+    @Override
+    public boolean checkCollision(Box box) {
+        var coll = super.checkCollision(box);
+
+        if (!coll) {
+            var inverse = (Rectangle) getHitbox().clone();
+            inverse.setLocation((int) getX(), (int) getY() - gap - getHeight());
+            coll = inverse.intersects(box.getHitbox());
+        }
+
+        return coll;
     }
 }
